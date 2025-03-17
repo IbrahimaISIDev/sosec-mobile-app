@@ -9,7 +9,7 @@ L'application mobile SOSEC est conçue pour la gestion de flotte de camions, per
 - Chauffeurs de camion
 - Dispatchers
 - Administrateurs
-- 
+
 ## Fonctionnalités
 - **Capture de photos** : Utilisation de l'appareil pour prendre des photos.
 - Exemple : **Scan de tickets** : Les chauffeurs peuvent scanner des tickets (par exemple, pour des achats de carburant, des frais d'entretien) et extraire les informations via l'OCR.
@@ -36,7 +36,6 @@ L'application mobile SOSEC est conçue pour la gestion de flotte de camions, per
 7. Les données extraites sont affichées pour vérification
 8. Après validation, les données sont enregistrées dans la base SQLite locale
 9. Les données sont ajoutées à la file d'attente de synchronisation
-- 
 
 ## Architecture technique
 ### Pile technologique
