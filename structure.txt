@@ -1,0 +1,150 @@
+sosec-mobile-app/
+├── src/
+│   ├── api/                    # Services d'API et Firebase
+│   │   ├── firebase.ts         # Configuration Firebase
+│   │   ├── openaiService.ts    # Service OpenAI pour l'OCR
+│   │   └── syncService.ts      # Service de synchronisation
+│   │   
+│   ├── assets/                 # Ressources statiques
+│   │   ├── fonts/              # Polices personnalisées
+│   │   ├── icons/              # Icônes de l'application
+│   │   └── images/             # Images de l'application
+│   │
+│   ├── components/             # Composants réutilisables
+│   │   ├── common/             # Composants génériques
+│   │   │   ├── Button.tsx      # Bouton personnalisé
+│   │   │   ├── Card.tsx        # Carte personnalisée
+│   │   │   ├── Header.tsx      # En-tête de l'application
+│   │   │   ├── Input.tsx       # Champ de saisie personnalisé
+│   │   │   └── Loading.tsx     # Indicateur de chargement
+│   │   │
+│   │   ├── home/               # Composants spécifiques à l'accueil
+│   │   │   ├── MenuCard.tsx    # Carte de menu
+│   │   │   ├── TaskItem.tsx    # Élément de tâche
+│   │   │   └── SyncStatus.tsx  # Indicateur de synchronisation
+│   │   │
+│   │   ├── scan/               # Composants de numérisation
+│   │   │   ├── Camera.tsx      # Composant de caméra
+│   │   │   ├── ScanPreview.tsx # Aperçu de numérisation
+│   │   │   └── TicketForm.tsx  # Formulaire de ticket
+│   │   │
+│   │   ├── expense/            # Composants de dépenses
+│   │   │   ├── ExpenseForm.tsx # Formulaire de dépense
+│   │   │   └── ExpenseItem.tsx # Élément de dépense
+│   │   │
+│   │   └── mileage/            # Composants pour le kilométrage
+│   │       ├── MileageForm.tsx # Formulaire de kilométrage
+│   │       └── ServiceAlert.tsx # Alerte d'entretien
+│   │
+│   ├── contexts/               # Contextes React
+│   │   ├── AuthContext.tsx     # Contexte d'authentification
+│   │   ├── OfflineContext.tsx  # Contexte de gestion hors-ligne
+│   │   └── SyncContext.tsx     # Contexte de synchronisation
+│   │
+│   ├── hooks/                  # Hooks personnalisés
+│   │   ├── useAuth.ts          # Hook d'authentification
+│   │   ├── useCamera.ts        # Hook pour la caméra
+│   │   ├── useFirestore.ts     # Hook pour Firestore
+│   │   ├── useLocalStorage.ts  # Hook pour le stockage local
+│   │   ├── useOCR.ts           # Hook pour l'OCR
+│   │   └── useSync.ts          # Hook pour la synchronisation
+│   │
+│   ├── navigation/             # Configuration de la navigation
+│   │   ├── AppNavigator.tsx    # Navigateur principal
+│   │   ├── AuthNavigator.tsx   # Navigateur d'authentification
+│   │   ├── HomeNavigator.tsx   # Navigateur de l'accueil
+│   │   └── RootNavigator.tsx   # Navigateur racine
+│   │
+│   ├── screens/                # Écrans de l'application
+│   │   ├── auth/               # Écrans d'authentification
+│   │   │   ├── LoginScreen.tsx # Écran de connexion
+│   │   │   └── PinScreen.tsx   # Écran de saisie du PIN
+│   │   │
+│   │   ├── home/               # Écrans d'accueil
+│   │   │   └── HomeScreen.tsx  # Écran principal
+│   │   │
+│   │   ├── scan/               # Écrans de numérisation
+│   │   │   ├── ScanTicketScreen.tsx    # Numérisation de tickets
+│   │   │   └── ScanResultScreen.tsx    # Résultats de numérisation
+│   │   │
+│   │   ├── expense/            # Écrans de dépenses
+│   │   │   ├── ExpenseScreen.tsx       # Liste des dépenses
+│   │   │   └── AddExpenseScreen.tsx    # Ajout de dépense
+│   │   │
+│   │   ├── mileage/            # Écrans de kilométrage
+│   │   │   ├── MileageScreen.tsx       # Écran de kilométrage
+│   │   │   └── ScanMileageScreen.tsx   # Numérisation du kilométrage
+│   │   │
+│   │   ├── alerts/             # Écrans d'alertes
+│   │   │   └── AlertsScreen.tsx        # Liste des alertes
+│   │   │
+│   │   ├── profile/            # Écrans de profil
+│   │   │   └── ProfileScreen.tsx       # Profil utilisateur
+│   │   │
+│   │   ├── truck/              # Écrans de gestion des camions
+│   │   │   └── TruckScreen.tsx         # Détails du camion
+│   │   │
+│   │   └── history/            # Écrans d'historique
+│   │       └── HistoryScreen.tsx       # Historique des opérations
+│   │
+│   ├── services/               # Services d'application
+│   │   ├── authService.ts      # Service d'authentification
+│   │   ├── cameraService.ts    # Service de caméra
+│   │   ├── ocrService.ts       # Service d'OCR
+│   │   ├── storageService.ts   # Service de stockage
+│   │   └── syncService.ts      # Service de synchronisation
+│   │
+│   ├── store/                  # Gestion de l'état (Redux)
+│   │   ├── slices/             # Tranches Redux
+│   │   │   ├── authSlice.ts    # Tranche d'authentification
+│   │   │   ├── expenseSlice.ts # Tranche de dépenses
+│   │   │   ├── mileageSlice.ts # Tranche de kilométrage
+│   │   │   ├── syncSlice.ts    # Tranche de synchronisation
+│   │   │   └── ticketSlice.ts  # Tranche de tickets
+│   │   │
+│   │   ├── actions.ts          # Actions Redux
+│   │   ├── reducers.ts         # Réducteurs Redux
+│   │   └── store.ts            # Configuration du store
+│   │
+│   ├── types/                  # Types TypeScript
+│   │   ├── api.types.ts        # Types d'API
+│   │   ├── auth.types.ts       # Types d'authentification
+│   │   ├── expense.types.ts    # Types de dépenses
+│   │   ├── mileage.types.ts    # Types de kilométrage
+│   │   ├── navigation.types.ts # Types de navigation
+│   │   ├── ticket.types.ts     # Types de tickets
+│   │   └── user.types.ts       # Types d'utilisateur
+│   │
+│   ├── utils/                  # Fonctions utilitaires
+│   │   ├── constants.ts        # Constantes de l'application
+│   │   ├── dateUtils.ts        # Utilitaires de date
+│   │   ├── formatUtils.ts      # Utilitaires de formatage
+│   │   ├── imageUtils.ts       # Utilitaires d'image
+│   │   ├── storageUtils.ts     # Utilitaires de stockage
+│   │   └── validationUtils.ts  # Utilitaires de validation
+│   │
+│   ├── db/                     # Configuration de la base de données locale
+│   │   ├── models/             # Modèles de données
+│   │   │   ├── Expense.ts      # Modèle de dépense
+│   │   │   ├── MileageRecord.ts# Modèle de kilométrage
+│   │   │   ├── Ticket.ts       # Modèle de ticket
+│   │   │   └── User.ts         # Modèle d'utilisateur
+│   │   │
+│   │   ├── schema.ts           # Schéma de la base de données
+│   │   └── database.ts         # Configuration de la base de données
+│   │
+│   ├── config/                 # Configuration de l'application
+│   │   ├── apiConfig.ts        # Configuration des API
+│   │   ├── firebaseConfig.ts   # Configuration Firebase
+│   │   └── appConfig.ts        # Configuration générale
+│   │
+│   ├── App.tsx                 # Point d'entrée de l'application
+│   └── index.tsx               # Fichier racine
+│
+├── .gitignore                  # Fichiers ignorés par Git
+├── app.json                    # Configuration Expo
+├── babel.config.js             # Configuration Babel
+├── metro.config.js             # Configuration Metro
+├── package.json                # Dépendances npm
+├── tsconfig.json               # Configuration TypeScript
+└── README.md                   # Documentation du projet
