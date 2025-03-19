@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "341144365707",
+    "project_id": "sosec-mobile-app",
+    "storage_bucket": "sosec-mobile-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341144365707:android:9bab492ce4b60a3163c28e",
+        "android_client_info": {
+          "package_name": "com.sarayatech.sosec"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW4nXDj3a9LcgLoLJ-jSbqV89kcwyldNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
