@@ -1,9 +1,22 @@
 // src/types/expense.types.ts
-export interface ExpenseData {
+  export enum ExpenseType {
+    FUEL = 'FUEL',
+    OIL = 'OIL',
+    REPAIRS = 'REPAIRS',
+    OTHER = 'OTHER'
+  }
+  
+  export enum InputType {
+    MANUAL = 'MANUAL',
+    SCAN = 'SCAN'
+  }
+  
+  export interface ExpenseData {
     id: string;
-    type: 'fuel' | 'oil' | 'repair' | ' ohters' ;
-    amount: number;
+    type: ExpenseType;
     date: Date;
+    amount: number;
+    quantity?: number; // en litres pour carburant/huile
     truckId: string;
     driverId: string;
     liters?: number;
@@ -14,4 +27,11 @@ export interface ExpenseData {
     notes?: string;
     receiptImageUrl?: string;
     syncStatus: 'local' | 'synced';
+  }
+  export interface ExpenseFormData {
+    type: ExpenseType;
+    date: Date;
+    amount: number;
+    quantity?: number;
+    notes?: string;
   }

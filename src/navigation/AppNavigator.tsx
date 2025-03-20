@@ -9,6 +9,8 @@ import ScanTicketScreen from "../screens/scan/ScanTicketScreen";
 import ScanResultScreen from "../screens/scan/ScanResultScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import HistoryScreen from "../screens/history/HistoryScreen";
+import ExpenseHomeScreen from '../screens/expense/ExpenseHomeScreen';
+import ManualExpenseScreen from '../screens/expense/ManualExpenseScreen';
 // import ScanMileageScreen from "../screens/mileage/ScanMileageScreen";
 // import ExpenseScreen from "../screens/expense/ExpenseScreen";
 // import AddExpenseScreen from "../screens/expense/AddExpenseScreen";
@@ -29,6 +31,8 @@ const HomeStack = () => (
     <Stack.Screen name="Expense" component={ExpenseScreen} />
     <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
     <Stack.Screen name="Alerts" component={AlertsScreen} /> */}
+    <Stack.Screen name="ExpenseHome" component={ExpenseHomeScreen} />
+    <Stack.Screen name="ManualExpense" component={ManualExpenseScreen} />
   </Stack.Navigator>
 );
 

@@ -29,12 +29,14 @@ sosec-mobile-app/
 │   │   │   └── TicketForm.tsx  # Formulaire de ticket
 │   │   │
 │   │   ├── expense/            # Composants de dépenses
-│   │   │   ├── ExpenseForm.tsx # Formulaire de dépense
-│   │   │   └── ExpenseItem.tsx # Élément de dépense
+│   │   │   ├── ExpenseTypeCard.tsx    # Carte pour chaque type de dépense
+│   │   │   ├── InputTypeOption.tsx    # Option pour le type de saisie (Manuel/Scanner)
+│   │   │   ├── ExpenseForm.tsx        # Formulaire de saisie manuelle
+│   │   │   └── ExpenseItem.tsx        # Élément de dépense
 │   │   │
-│   │   └── mileage/            # Composants pour le kilométrage
-│   │       ├── MileageForm.tsx # Formulaire de kilométrage
-│   │       └── ServiceAlert.tsx # Alerte d'entretien
+│   │   └── mileage/                   # Composants pour le kilométrage
+│   │       ├── MileageForm.tsx        # Formulaire de kilométrage
+│   │       └── ServiceAlert.tsx       # Alerte d'entretien
 │   │
 │   ├── contexts/               # Contextes React
 │   │   ├── AuthContext.tsx     # Contexte d'authentification
@@ -68,8 +70,11 @@ sosec-mobile-app/
 │   │   │   └── ScanResultScreen.tsx    # Résultats de numérisation
 │   │   │
 │   │   ├── expense/            # Écrans de dépenses
-│   │   │   ├── ExpenseScreen.tsx       # Liste des dépenses
-│   │   │   └── AddExpenseScreen.tsx    # Ajout de dépense
+│   │   │   ├── ExpenseHomeScreen.tsx      # Écran d'accueil des dépenses avec les catégories
+│   │   │   ├── ExpenseInputTypeScreen.tsx # Écran de choix du type de saisie (Manuel/Scanner)
+│   │   │   ├── ManualExpenseScreen.tsx    # Écran de saisie manuelle des dépenses
+│   │   │   ├── ExpenseScreen.tsx          # Liste des dépenses
+│   │   │   └── AddExpenseScreen.tsx       # Ajout de dépense
 │   │   │
 │   │   ├── mileage/            # Écrans de kilométrage
 │   │   │   ├── MileageScreen.tsx       # Écran de kilométrage
