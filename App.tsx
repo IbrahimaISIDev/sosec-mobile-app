@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// src/App.tsx
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
+import AppNavigator from './src/navigation/AppNavigator';
+import { SyncProvider } from './src/contexts/SyncContext';
+import { AuthProvider } from './src/contexts/AuthContext';
 
-export default function App() {
+// Initialize Firebase (mocked for this implementation)
+// import { initializeApp } from 'firebase/app';
+// import { firebaseConfig } from './config/firebaseConfig';
+// initializeApp(firebaseConfig);
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <StatusBar backgroundColor="#0066CC" barStyle="light-content" />
+      <AuthProvider>
+        <SyncProvider>
+          <NavigationContainer>
+            <AppNavigator />
+          </NavigationContainer>
+        </SyncProvider>
+      </AuthProvider>
+    </SafeAreaProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

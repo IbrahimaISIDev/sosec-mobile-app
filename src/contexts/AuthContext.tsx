@@ -32,8 +32,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     // Pour l'exemple, on simule un utilisateur connecté
     const mockUser: User = {
       id: 'user123',
-      displayName: 'Jean Dupont',
-      email: 'jean.dupont@example.com'
+      displayName: 'Ibrahima Diallo',
+      email: 'ibrahima.diallo@gmail.com',
     };
     
     const mockTruck: Truck = {
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       
       const mockUser: User = {
         id: 'user123',
-        displayName: 'Jean Dupont',
+        displayName: 'Ibrahima Diallo',
         email: email
       };
       

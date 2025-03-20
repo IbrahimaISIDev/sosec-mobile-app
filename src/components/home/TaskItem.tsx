@@ -1,15 +1,14 @@
 // src/components/home/TaskItem.tsx
-
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface TaskItemProps {
-  icon: string; // Modifié pour accepter un nom d'icône sous forme de chaîne
+  icon: string;
   title: string;
   description: string;
   status: 'todo' | 'inprogress' | 'completed';
-  onPress?: () => void; // Ajout de onPress optionnel pour la navigation
+  onPress?: () => void; 
 }
 
 const TaskItem = ({ icon, title, description, status, onPress }: TaskItemProps) => {

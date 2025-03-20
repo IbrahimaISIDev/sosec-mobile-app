@@ -112,7 +112,11 @@ sosec-mobile-app/
 │   │   ├── expense.types.ts    # Types de dépenses
 │   │   ├── mileage.types.ts    # Types de kilométrage
 │   │   ├── navigation.types.ts # Types de navigation
+│   │   ├── react-native-dotenv.d.ts
+│   │   ├── sqlite.d.ts 
+│   │   ├── navigation.types.ts # Types de navigation
 │   │   ├── ticket.types.ts     # Types de tickets
+│   │   ├── truck.types.ts     # Types de camion
 │   │   └── user.types.ts       # Types d'utilisateur
 │   │
 │   ├── utils/                  # Fonctions utilitaires

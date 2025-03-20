@@ -14,7 +14,7 @@ type TaskStatus = "todo" | "inprogress" | "completed";
 
 interface Task {
   id: string;
-  icon: string; // Nom de l'icône pour react-native-vector-icons
+  icon: string; 
   title: string;
   description: string;
   status: TaskStatus;
@@ -32,10 +32,6 @@ const HomeScreen = () => {
   }, []);
 
   const handleNavigate = (screen: string) => {
-    alert(
-      `Navigation vers l'écran ${screen} - Cette fonctionnalité sera disponible prochainement.`
-    );
-
     navigation.navigate(screen as never);
   };
 
