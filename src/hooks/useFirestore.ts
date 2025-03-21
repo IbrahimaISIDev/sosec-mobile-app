@@ -1,10 +1,13 @@
 // src/hooks/useFirestore.ts
-import { useState, useEffect } from 'react';
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
-import { TruckData } from '../types/truck.types';
-import { ExpenseData } from '../types/expense.types';
-import { HistoryItem } from '../types/history.types';
-import { useAuth } from './useAuth';
+import { useState, useEffect } from "react";
+import firestore, {
+  FirebaseFirestoreTypes,
+} from "@react-native-firebase/firestore";
+import { TruckData } from "../types/truck.types";
+import { ExpenseData } from "../types/expense.types";
+import { HistoryItem } from "../types/history.types";
+import { useAuth } from "./useAuth";
+import { MileageRecord } from "types/mileage.types";
 
 export const useFirestore = () => {
   const { user } = useAuth();
@@ -19,13 +22,16 @@ export const useFirestore = () => {
     setLoading(true);
     setError(null);
     try {
-      const truckDoc = await firestore().collection('trucks').doc(truckId).get();
+      const truckDoc = await firestore()
+        .collection("trucks")
+        .doc(truckId)
+        .get();
       if (truckDoc.exists) {
         return { id: truckDoc.id, ...truckDoc.data() } as TruckData;
       }
       return null;
     } catch (err) {
-      const errorMsg = 'Erreur lors de la récupération du camion';
+      const errorMsg = "Erreur lors de la récupération du camion";
       console.error(`${errorMsg}:`, err);
       setError(errorMsg);
       throw err;
@@ -34,16 +40,18 @@ export const useFirestore = () => {
     }
   };
 
-  const getLastFuelingForTruck = async (truckId: string): Promise<ExpenseData | null> => {
+  const getLastFuelingForTruck = async (
+    truckId: string
+  ): Promise<ExpenseData | null> => {
     if (!truckId) return null;
     setLoading(true);
     setError(null);
     try {
       const fuelingSnapshot = await firestore()
-        .collection('expenses')
-        .where('truckId', '==', truckId)
-        .where('type', '==', 'fuel')
-        .orderBy('date', 'desc')
+        .collection("expenses")
+        .where("truckId", "==", truckId)
+        .where("type", "==", "fuel")
+        .orderBy("date", "desc")
         .limit(1)
         .get();
 
@@ -53,7 +61,7 @@ export const useFirestore = () => {
       }
       return null;
     } catch (err) {
-      const errorMsg = 'Erreur lors de la récupération du dernier plein';
+      const errorMsg = "Erreur lors de la récupération du dernier plein";
       console.error(`${errorMsg}:`, err);
       setError(errorMsg);
       throw err;
@@ -62,23 +70,23 @@ export const useFirestore = () => {
     }
   };
 
-  const updateTruckMileage = async (truckId: string, newMileage: number): Promise<{ success: boolean; message?: string }> => {
-    if (!truckId || typeof newMileage !== 'number') {
-      return { success: false, message: 'Paramètres invalides' };
+  const updateTruckMileage = async (
+    truckId: string,
+    newMileage: number
+  ): Promise<{ success: boolean; message?: string }> => {
+    if (!truckId || typeof newMileage !== "number") {
+      return { success: false, message: "Paramètres invalides" };
     }
     setLoading(true);
     setError(null);
     try {
-      await firestore()
-        .collection('trucks')
-        .doc(truckId)
-        .update({
-          currentKm: newMileage,
-          lastUpdated: firestore.FieldValue.serverTimestamp(),
-        });
+      await firestore().collection("trucks").doc(truckId).update({
+        currentKm: newMileage,
+        lastUpdated: firestore.FieldValue.serverTimestamp(),
+      });
       return { success: true };
     } catch (err) {
-      const errorMsg = 'Erreur lors de la mise à jour du kilométrage';
+      const errorMsg = "Erreur lors de la mise à jour du kilométrage";
       console.error(`${errorMsg}:`, err);
       setError(errorMsg);
       return { success: false, message: errorMsg };
@@ -93,32 +101,73 @@ export const useFirestore = () => {
     kilometer: number;
     imageUrl?: string;
   }): Promise<{ success: boolean; data?: any; message?: string }> => {
-    if (!record.truckId || !record.driverId || typeof record.kilometer !== 'number') {
-      return { success: false, message: 'Paramètres invalides' };
+    if (
+      !record.truckId ||
+      !record.driverId ||
+      typeof record.kilometer !== "number"
+    ) {
+      return { success: false, message: "Paramètres invalides" };
     }
     setLoading(true);
     setError(null);
     try {
       const newRecord = {
-        ...record, 
+        ...record,
         date: firestore.FieldValue.serverTimestamp(),
         isVerified: false,
-        syncStatus: 'synced' as const,
+        syncStatus: "synced" as const,
       };
 
-      const docRef = await firestore().collection('mileage').add(newRecord);
-      const updateResult = await updateTruckMileage(record.truckId, record.kilometer);
+      const docRef = await firestore().collection("mileage").add(newRecord);
+      const updateResult = await updateTruckMileage(
+        record.truckId,
+        record.kilometer
+      );
 
       if (!updateResult.success) {
-        throw new Error('Échec de la mise à jour du kilométrage');
+        throw new Error("Échec de la mise à jour du kilométrage");
       }
 
       return { success: true, data: { id: docRef.id, ...newRecord } };
     } catch (err) {
-      const errorMsg = 'Erreur lors de l’ajout du relevé kilométrique';
+      const errorMsg = "Erreur lors de l’ajout du relevé kilométrique";
       console.error(`${errorMsg}:`, err);
       setError(errorMsg);
       return { success: false, message: errorMsg };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveMileageRecord = async (record: MileageRecord): Promise<void> => {
+    if (
+      !record.truckId ||
+      !record.driverId ||
+      typeof record.kilometer !== "number"
+    ) {
+      throw new Error("Invalid parameters");
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      const newRecord = {
+        truckId: record.truckId,
+        driverId: record.driverId,
+        kilometer: record.kilometer,
+        date: firestore.Timestamp.fromDate(record.date),
+        imageUrl: record.imageUrl,
+        licensePlate: record.licensePlate,
+        isVerified: record.isVerified,
+        syncStatus: record.syncStatus,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      };
+
+      await firestore().collection("mileage").add(newRecord);
+    } catch (err) {
+      const errorMsg = "Error saving mileage record";
+      console.error(`${errorMsg}:`, err);
+      setError(errorMsg);
+      throw err;
     } finally {
       setLoading(false);
     }
@@ -130,45 +179,49 @@ export const useFirestore = () => {
     setError(null);
     try {
       const mileageSnapshot = await firestore()
-        .collection('mileage')
-        .where('driverId', '==', userId)
-        .orderBy('date', 'desc')
+        .collection("mileage")
+        .where("driverId", "==", userId)
+        .orderBy("date", "desc")
         .get();
 
       const expensesSnapshot = await firestore()
-        .collection('expenses')
-        .where('driverId', '==', userId)
-        .orderBy('date', 'desc')
+        .collection("expenses")
+        .where("driverId", "==", userId)
+        .orderBy("date", "desc")
         .get();
 
-      const mileageItems: HistoryItem[] = mileageSnapshot.docs.map(doc => ({
+      const mileageItems: HistoryItem[] = mileageSnapshot.docs.map((doc) => ({
         id: doc.id,
-        category: 'mileage' as const,
-        type: 'tableau_bord' as const,
+        category: "mileage" as const,
+        type: "tableau_bord" as const,
         date: doc.data().date?.toDate() || new Date(),
         mileage: doc.data().kilometer,
         truckId: doc.data().truckId,
         driverId: doc.data().driverId,
         imageUrl: doc.data().imageUrl,
-        syncStatus: doc.data().syncStatus || 'synced',
-        verificationStatus: doc.data().isVerified ? 'verified' : 'pending',
+        syncStatus: doc.data().syncStatus || "synced",
+        verificationStatus: doc.data().isVerified ? "verified" : "pending",
       }));
 
-      const expenseItems: HistoryItem[] = expensesSnapshot.docs.map(doc => ({
+      const expenseItems: HistoryItem[] = expensesSnapshot.docs.map((doc) => ({
         id: doc.id,
-        category: doc.data().type === 'fuel' ? 'expense' : 'ticket',
-        type: (doc.data().type === 'fuel' ? 'carburant' : doc.data().type) as HistoryItem['type'],
+        category: doc.data().type === "fuel" ? "expense" : "ticket",
+        type: (doc.data().type === "fuel"
+          ? "carburant"
+          : doc.data().type) as HistoryItem["type"],
         date: doc.data().date?.toDate() || new Date(),
         amount: doc.data().amount,
         truckId: doc.data().truckId,
         driverId: doc.data().driverId,
         imageUrl: doc.data().receiptImageUrl,
-        syncStatus: doc.data().syncStatus || 'synced',
+        syncStatus: doc.data().syncStatus || "synced",
       }));
 
-      return [...mileageItems, ...expenseItems].sort((a, b) => b.date.getTime() - a.date.getTime());
+      return [...mileageItems, ...expenseItems].sort(
+        (a, b) => b.date.getTime() - a.date.getTime()
+      );
     } catch (err) {
-      const errorMsg = 'Erreur lors de la récupération de l’historique';
+      const errorMsg = "Erreur lors de la récupération de l’historique";
       console.error(`${errorMsg}:`, err);
       setError(errorMsg);
       return [];
@@ -182,6 +235,7 @@ export const useFirestore = () => {
     getTruckById,
     getLastFuelingForTruck,
     updateTruckMileage,
+    saveMileageRecord,
     addMileageRecord,
     getHistoryItems,
     loading,

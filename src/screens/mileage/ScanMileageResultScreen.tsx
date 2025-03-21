@@ -9,16 +9,13 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, NavigationProp as NavProp } from "@react-navigation/native";
 import { useCamera } from "../../hooks/useCamera";
-import { CameraView } from "expo-camera"; // Changed import
+import { CameraView } from "expo-camera";
 import Icon from "react-native-vector-icons/Ionicons";
 
-// Navigation prop type
-type NavigationProp = {
-  navigate: (screen: string, params?: object) => void;
-  goBack: () => void;
-};
+// Define navigation prop type
+type NavigationProp = NavProp<any>;
 
 // Camera ref type
 type CameraRef = CameraView | null;
@@ -84,8 +81,8 @@ const ScanMileageScreen = () => {
       <View style={styles.cameraContainer}>
         <CameraView
           style={styles.camera}
-          facing="back" // Changed from type to facing
-          flash={flashMode === "on" ? "on" : "off"} // Changed flashMode to flash
+          facing="back"
+          flash={flashMode === "on" ? "on" : "off"}
           ref={(ref: CameraRef) => setCameraRef(ref)}
         />
         <View style={styles.overlay}>

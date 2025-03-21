@@ -77,8 +77,8 @@ sosec-mobile-app/
 │   │   │   └── AddExpenseScreen.tsx       # Ajout de dépense
 │   │   │
 │   │   ├── mileage/            # Écrans de kilométrage
-│   │   │   ├── MileageScreen.tsx       # Écran de kilométrage
-│   │   │   └── ScanMileageScreen.tsx   # Numérisation du kilométrage
+│   │   │   ├── ScanMileageScreen.tsx         # Écran de kilométrage
+│   │   │   └── ScanMileageResultScreen.tsx   # Numérisation du kilométrage : pour la page qui affiche les résultats extraits
 │   │   │
 │   │   ├── alerts/             # Écrans d'alertes
 │   │   │   └── AlertsScreen.tsx        # Liste des alertes
